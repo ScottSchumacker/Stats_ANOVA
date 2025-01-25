@@ -14,26 +14,42 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(dplyr)
 library(gridExtra)
+library(tidyr)
 ```
 
 ## Creating a data set
+For this example of an analysis of variance, we can imagine 3 blood pressure drugs to see which drug has a statistical difference in lowering blood pressure.
+
+We can create three data sets, one for each example drug. We can use the rnorm function to create normal distributions.
 ```{r}
+DrugA <- rnorm(100, mean = 80, sd = 1)
+DrugB <- rnorm(100, mean = 95, sd = 1)
+DrugC <- rnorm(100, mean = 83, sd = 1)
+
+df <- data.frame(DrugA, DrugB, DrugC)
+
+df2 <- df %>% pivot_longer(
+  cols = `DrugA`:`DrugC`,
+  names_to = "Drug",
+  values_to = "Blood_Pressure"
+)
+head(df2)
 ```
 
 After obtaining our data set we can visually inspect the distributions to better understand the shape of the data.
 
 ### Checking for normality
+```{r}
+ggplot(df2, aes(x = Blood_Pressure, fill = Drug)) +
+  geom_histogram(color = "black", alpha = 0.6) +
+  theme_classic() +
+  xlab("Diastolic Blood Pressure")
+```
 
 ***Checking for normality***
-```{r}
-```
 
 ### Statistical Analysis
 
 ***ANOVA***
-```{r}
-testOut <- t.test(under50$under50, above50$above50, var.equal = TRUE)
-testOut
-```
 
 ### Results
