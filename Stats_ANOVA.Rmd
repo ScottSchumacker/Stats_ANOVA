@@ -1,0 +1,39 @@
+---
+title: "Statistics: Analysis of Variance (ANOVA)"
+author: "Scott Schumacker"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+***Loading Packages***
+```{r}
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+```
+
+## Creating a data set
+```{r}
+```
+
+After obtaining our data set we can visually inspect the distributions to better understand the shape of the data.
+
+### Checking for normality
+
+***Checking for normality***
+```{r}
+```
+
+### Statistical Analysis
+
+***ANOVA***
+```{r}
+testOut <- t.test(under50$under50, above50$above50, var.equal = TRUE)
+testOut
+```
+
+### Results
