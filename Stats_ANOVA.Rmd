@@ -59,7 +59,15 @@ shapiro.test(DrugC)
 ```
 Because our p-value is above our alpha of 0.05, we can assume that the data follows a normal distribution.
 
-Now that we know that the three sample groups follow a normal distribution, we can check the assumption of homogeneity of variance (homoscedasticity) before running our t-test. To test homogeneity of variance, we can run Fisher's F-Test.
+Now that we know that the three sample groups follow a normal distribution, we can check the assumption of homogeneity of variance (homoscedasticity) before running our t-test. To test homogeneity of variance, we can run Bartlett's Test.
+
+***Checking for homoscedasticity***
+```{r}
+bartlett.test(Blood_Pressure ~ Drug, data = df2)
+```
+Because our p-value is above our alpha of 0.05, we can assume homogeneity of variance between the three groups.
+
+Now that we know that our data is randomly sampled, follows a normal distribution, is continuous, and there is homogeneity of variance between the three groups, we can run the ANOVA.
 
 ### Statistical Analysis
 
