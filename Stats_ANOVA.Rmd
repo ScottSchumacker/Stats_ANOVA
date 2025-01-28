@@ -71,6 +71,17 @@ Now that we know that our data is randomly sampled, follows a normal distributio
 
 ### Statistical Analysis
 
-***ANOVA***
+Before running the ANOVA we need to specify our hypothesis:
+H0: The difference in the means between the groups is 0 (null hypothesis)
+Ha: The difference in the means between the groups is not 0 (alternative hypothesis)
 
+We can set our alpha to 0.05 for this example. This means that we are looking for a p-value below 0.05 to reject the null hypothesis.
+
+***ANOVA***
+```{r}
+analysisOut <- aov(Blood_Pressure ~ Drug, data = df2)
+summary(analysisOut)
+```
 ### Results
+
+Our p-value is less than 0.01 which means that we can reject our null hypothesis. We can assume that there is a statistically significant difference between the three groups in terms of blood pressure. 
