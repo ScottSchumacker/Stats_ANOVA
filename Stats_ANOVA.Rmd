@@ -26,7 +26,7 @@ We can create three data sets, one for each example drug. We can use the rnorm f
 ```{r}
 DrugA <- rnorm(100, mean = 80, sd = 1)
 DrugB <- rnorm(100, mean = 95, sd = 1)
-DrugC <- rnorm(100, mean = 83, sd = 1)
+DrugC <- rnorm(100, mean = 95, sd = 1)
 
 df <- data.frame(DrugA, DrugB, DrugC)
 
@@ -82,6 +82,16 @@ We can set our alpha to 0.05 for this example. This means that we are looking fo
 analysisOut <- aov(Blood_Pressure ~ Drug, data = df2)
 summary(analysisOut)
 ```
-### Results
+### ANOVA Results
 
 Our p-value is less than 0.01 which means that we can reject our null hypothesis. We can assume that there is a statistically significant difference between the three groups in terms of blood pressure.
+
+### Tukey's Honest Significant Difference (HSD) Test
+
+From our ANOVA we know that there is a significant difference among the three groups but we don't know where that difference is. In order to get a better idea of where the difference is, we can run Tukey's Honest Significant Difference test.
+```{r}
+TukeyHSD(analysisOut, conf.level = 0.95)
+```
+### Results 
+
+We can see that there is a statistically significant difference between Drug B and Drug A and there is a statistically significant difference between Drug C and Drug A and not significant difference between Drug B and Drug C. This points us to the conclusion that Drug A is may be more optimal for lowering blood pressure.
