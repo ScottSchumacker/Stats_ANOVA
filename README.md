@@ -1,2 +1,2 @@
 # Stats_ANOVA
-An example project for an analysis of variance (ANOVA)
+A project highlighting an example analysis of variance (ANOVA) on 3 example blood pressure medications.
