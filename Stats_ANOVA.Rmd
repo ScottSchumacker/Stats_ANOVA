@@ -9,6 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+This project will show an example Analysis of Variance (ANOVA) on 3 different example blood pressure drugs.
+
 ***Loading Packages***
 ```{r}
 library(ggplot2)
@@ -18,9 +20,9 @@ library(tidyr)
 ```
 
 ## Creating a data set
-For this example of an analysis of variance, we can imagine 3 blood pressure drugs to see which drug has a statistical difference in lowering blood pressure.
+For this example of an analysis of variance, we can imagine 3 blood pressure drugs to see which drug has a statistically significant difference in lowering blood pressure.
 
-We can create three data sets, one for each example drug. We can use the rnorm function to create normal distributions.
+We can create three data sets, one for each example drug. We can use the rnorm function to create normal distributions. In addition, we can keep things simple and keep the sample size for each group at 100 samples.
 ```{r}
 DrugA <- rnorm(100, mean = 80, sd = 1)
 DrugB <- rnorm(100, mean = 95, sd = 1)
@@ -38,7 +40,6 @@ head(df2)
 
 After obtaining our data set we can visually inspect the distributions to better understand the shape of the data.
 
-### Checking for normality
 ```{r}
 ggplot(df2, aes(x = Blood_Pressure, fill = Drug)) +
   geom_histogram(color = "black", alpha = 0.6) +
@@ -46,7 +47,19 @@ ggplot(df2, aes(x = Blood_Pressure, fill = Drug)) +
   xlab("Diastolic Blood Pressure")
 ```
 
+After visualizing the data we can see that all three distributions follow a normal distribution pattern. We can confirm that the three groups follow a normal distribution by testing for normality and running the Shaprio-Wilk Test.
+
+### Checking for normality and homoscedasticity
+
 ***Checking for normality***
+```{r}
+shapiro.test(DrugA)
+shapiro.test(DrugB)
+shapiro.test(DrugC)
+```
+Because our p-value is above our alpha of 0.05, we can assume that the data follows a normal distribution.
+
+Now that we know that the three sample groups follow a normal distribution, we can check the assumption of homogeneity of variance (homoscedasticity) before running our t-test. To test homogeneity of variance, we can run Fisher's F-Test.
 
 ### Statistical Analysis
 
