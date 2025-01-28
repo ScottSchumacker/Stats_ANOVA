@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This project will show an example Analysis of Variance (ANOVA) on 3 different example blood pressure drugs to see if there is a statistically significant difference in lowering blood pressure.
+This project will show an example Analysis of Variance (ANOVA) on 3 different example blood pressure medications to see if there is a statistically significant difference in lowering blood pressure.
 
 ***Loading Packages***
 ```{r}
@@ -20,9 +20,9 @@ library(tidyr)
 ```
 
 ## Creating a data set
-For this example of an analysis of variance, we can imagine 3 different blood pressure drugs to see which drug has a statistically significant difference in lowering blood pressure.
+For this example of an analysis of variance, we can imagine 3 different blood pressure medications to see which drug has a statistically significant difference in lowering blood pressure.
 
-We can create three data sets, one for each example drug. We can use the rnorm function to create normal distributions. In addition, we can keep things simple and keep the sample size for each group at 100 samples.
+We can create three data sets, one for each example medication. We can use the rnorm function to create normal distributions. In addition, we can keep things simple and keep the sample size for each group at 100 samples.
 ```{r}
 DrugA <- rnorm(100, mean = 80, sd = 1)
 DrugB <- rnorm(100, mean = 95, sd = 1)
@@ -47,7 +47,9 @@ ggplot(df2, aes(x = Blood_Pressure, fill = Drug)) +
   xlab("Diastolic Blood Pressure")
 ```
 
-After visualizing the data, we can see that all three distributions follow a normal distribution pattern. We can confirm that the three groups follow a normal distribution by testing for normality and running the Shaprio-Wilk Test.
+After visualizing the data, we can see that all three distributions follow a normal distribution pattern. In addition, we can see that there may be a difference between Medication A and Medications B and C. 
+
+We can confirm that the three groups follow a normal distribution by testing for normality by running the Shaprio-Wilk Test with an alpha = 0.05.
 
 ### Checking for normality and homoscedasticity
 
@@ -57,9 +59,11 @@ shapiro.test(DrugA)
 shapiro.test(DrugB)
 shapiro.test(DrugC)
 ```
-Because our p-value is above our alpha of 0.05, we can assume that the data follows a normal distribution.
+Because our p-value is above our alpha of 0.05, we can assume that the data is normally distributed.
 
 Now that we know that the three sample groups follow a normal distribution, we can check the assumption of homogeneity of variance (homoscedasticity) before running our t-test. To test homogeneity of variance, we can run Bartlett's Test.
+
+We can run Bartlett's Test over Fisher's F Test because Bartlett's Test can accomodate more than two groups. We can run Bartlett's Test with an alpha of 0.05.
 
 ***Checking for homoscedasticity***
 ```{r}
@@ -94,4 +98,4 @@ TukeyHSD(analysisOut, conf.level = 0.95)
 ```
 ### Results 
 
-We can see that there is a statistically significant difference between Drug B and Drug A and there is a statistically significant difference between Drug C and Drug A and not significant difference between Drug B and Drug C. This points us to the conclusion that Drug A is may be more optimal for lowering blood pressure.
+We can see that there is a statistically significant difference between Drug B and Drug A and there is a statistically significant difference between Drug C and Drug A and no significant difference between Drug B and Drug C. This points us to the conclusion that Drug A is may be more optimal for lowering blood pressure.
