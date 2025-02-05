@@ -75,8 +75,8 @@ Now that we know that our data is randomly sampled, follows a normal distributio
 
 ### Statistical Analysis
 
-Before running the ANOVA we need to specify our hypothesis:
-H0: The difference in the means between the groups is 0 (null hypothesis)
+Before running the ANOVA we need to specify our hypothesis: <br>
+H0: The difference in the means between the groups is 0 (null hypothesis) <br>
 Ha: The difference in the means between the groups is not 0 (alternative hypothesis)
 
 We can set our alpha to 0.05 for this example. This means that we are looking for a p-value below 0.05 to reject the null hypothesis.
